@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<testsuite errors="0" failures="0" name="TesteTV.TesteTV" tests="3" time="0.000">
+	<testcase classname="TesteTV.TesteTV" name="testCanal" time="0.000"/>
+	<testcase classname="TesteTV.TesteTV" name="testPower" time="0.000"/>
+	<testcase classname="TesteTV.TesteTV" name="testVolume" time="0.000"/>
+	<system-out>
+<![CDATA[]]>	</system-out>
+	<system-err>
+<![CDATA[]]>	</system-err>
+</testsuite>

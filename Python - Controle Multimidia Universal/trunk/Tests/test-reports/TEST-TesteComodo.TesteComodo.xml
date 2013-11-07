@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<testsuite errors="0" failures="0" name="TesteComodo.TesteComodo" tests="3" time="0.000">
+	<testcase classname="TesteComodo.TesteComodo" name="testAddEquipment" time="0.000"/>
+	<testcase classname="TesteComodo.TesteComodo" name="testInitRoom" time="0.000"/>
+	<testcase classname="TesteComodo.TesteComodo" name="testNumberPeople" time="0.000"/>
+	<system-out>
+<![CDATA[]]>	</system-out>
+	<system-err>
+<![CDATA[]]>	</system-err>
+</testsuite>

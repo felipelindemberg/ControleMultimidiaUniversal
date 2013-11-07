@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<testsuite errors="0" failures="0" name="TesteResidencia.TesteResidencia" tests="4" time="0.000">
+	<testcase classname="TesteResidencia.TesteResidencia" name="testAddExistentRoom" time="0.000"/>
+	<testcase classname="TesteResidencia.TesteResidencia" name="testAddRooms" time="0.000"/>
+	<testcase classname="TesteResidencia.TesteResidencia" name="testInitResidence" time="0.000"/>
+	<testcase classname="TesteResidencia.TesteResidencia" name="testRemoveRoom" time="0.000"/>
+	<system-out>
+<![CDATA[]]>	</system-out>
+	<system-err>
+<![CDATA[]]>	</system-err>
+</testsuite>

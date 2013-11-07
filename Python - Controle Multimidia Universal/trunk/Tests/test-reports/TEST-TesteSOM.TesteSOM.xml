@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<testsuite errors="0" failures="0" name="TesteSOM.TesteSOM" tests="3" time="0.000">
+	<testcase classname="TesteSOM.TesteSOM" name="testChannel" time="0.000"/>
+	<testcase classname="TesteSOM.TesteSOM" name="testPower" time="0.000"/>
+	<testcase classname="TesteSOM.TesteSOM" name="testVolume" time="0.000"/>
+	<system-out>
+<![CDATA[]]>	</system-out>
+	<system-err>
+<![CDATA[]]>	</system-err>
+</testsuite>
