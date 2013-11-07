@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:button="@drawable/custom_check_box_tv"
             android:checked="true" />
-        
+
         <CheckBox
             android:id="@+id/checkBoxSom"
             android:layout_width="wrap_content"
@@ -26,26 +26,72 @@
             android:layout_marginLeft="70dip"
             android:button="@drawable/custom_check_box_som"
             android:checked="false" />
-
     </LinearLayout>
-    
-    <RelativeLayout
+
+    <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dip"
         android:gravity="center_horizontal"
-        android:orientation="horizontal" >
-        
-        <ImageButton
-        android:id="@+id/buttonUpChannel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_button_channel_up"/>
+        android:layout_marginTop="40dip"
+        android:orientation="vertical" >
 
-        
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
 
-    </RelativeLayout>
-    
-    
+            <ImageButton
+                android:id="@+id/buttonUpChannel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button_channel_up" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center_horizontal" >
+            
+            <ImageButton
+                android:id="@+id/buttonDownVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button_channel_up" />
+
+            <ImageButton
+                android:id="@+id/buttonMute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dip"
+                android:background="@drawable/custom_button_channel_up" />
+            
+            <ImageButton
+                android:id="@+id/buttonUpVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dip"
+                android:background="@drawable/custom_button_channel_up" />
+            
+        
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center_horizontal" >
+
+            <ImageButton
+                android:id="@+id/buttonUpChannel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button_channel_up" />
+        </TableRow>
+        
+        
+    </TableLayout>
 
 </LinearLayout>
