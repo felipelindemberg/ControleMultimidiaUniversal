@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bg_gray"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
     <LinearLayout
@@ -28,31 +28,33 @@
             android:button="@drawable/custom_check_box_som"
             android:checked="false" />
     </LinearLayout>
-    
-     <LinearLayout
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dip"
+        android:background="@drawable/background_name_room"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
-         <TextView
-             android:id="@+id/textViewNameRoom"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="SALA" />
-        
+        <TextView
+            android:id="@+id/textViewNameRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:text="SALA"
+            android:textColor="@color/red"
+            android:textSize="30dp" />
     </LinearLayout>
-    
 
-    <TableLayout
+   <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_marginTop="40dip"
+        android:gravity="center_horizontal"
         android:orientation="vertical" >
-
-        <TableRow
+        
+       <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -67,33 +69,34 @@
 
         <TableRow
             android:id="@+id/tableRow2"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
             android:gravity="center_horizontal" >
-            
-            <ImageButton
+			<ImageButton
                 android:id="@+id/buttonDownVolume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_channel_up" />
-
+                android:layout_marginRight="40dip"
+                android:background="@drawable/custom_button_volume_down" />
+            
             <ImageButton
                 android:id="@+id/buttonMute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dip"
-                android:background="@drawable/custom_button_channel_up" />
+                android:layout_marginTop="20dip"
+                android:layout_marginRight="40dip"
+                android:background="@drawable/custom_button_mute" />
+            
             
             <ImageButton
                 android:id="@+id/buttonUpVolume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dip"
-                android:background="@drawable/custom_button_channel_up" />
-            
-        
+                android:background="@drawable/custom_button_volume_up" />
         </TableRow>
+
+  
+
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="fill_parent"
@@ -102,13 +105,11 @@
             android:gravity="center_horizontal" >
 
             <ImageButton
-                android:id="@+id/buttonUpChannel"
+                android:id="@+id/buttonDownChannel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_channel_up" />
+                android:background="@drawable/custom_button_channel_down" />
         </TableRow>
-        
-        
     </TableLayout>
 
 </LinearLayout>
