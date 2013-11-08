@@ -1,5 +1,9 @@
 package com.embedded.controlemultimidiauniversal.net;
 
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.security.InvalidParameterException;
 import java.util.Map;
 
@@ -14,13 +18,14 @@ import android.net.Uri.Builder;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class HttpConnectionSender extends AsyncTask<String, Void, Boolean> {
+public class HttpConnectionSender extends AsyncTask<String, Void, String> {
 
 	/**
 	 * M&eacute;todo que gera uma URL v&aacute;lida apartir de um Map.
 	 * 
 	 * @param params
-	 *            Um Map com as seguintes chaves, sendo que a chave "address" &eacute; obrigat&oacute;ria:
+	 *            Um Map com as seguintes chaves, sendo que a chave "address"
+	 *            &eacute; obrigat&oacute;ria:
 	 *            <ul>
 	 *            <li><b>address</b> - O endere&ccedil;o;</li>
 	 *            <li><b>path</b> - Caminho dentro do endere&ccedil;o.</li>
@@ -55,11 +60,11 @@ public class HttpConnectionSender extends AsyncTask<String, Void, Boolean> {
 	}
 
 	@Override
-	protected Boolean doInBackground(String... params) {
+	protected String doInBackground(String... params) {
 		try {
 
 			if (params.length == 2) {
-				HttpResponse response;
+				HttpResponse response = null;
 				HttpClient client = new DefaultHttpClient();
 
 				String method = params[0];
@@ -75,25 +80,23 @@ public class HttpConnectionSender extends AsyncTask<String, Void, Boolean> {
 					response = client.execute(requestPost);
 				}
 
-				/*
-				 * Retirar o comentário caso deseje visualizar retorno do
-				 * servidor.
-				 * 
-				 * BufferedReader rd = new BufferedReader(new InputStreamReader(
-				 * response.getEntity().getContent()));
-				 * 
-				 * 
-				 * String webServiceInfo = "";
-				 * 
-				 * while ((webServiceInfo = rd.readLine()) != null) {
-				 * Log.d("info", webServiceInfo); }
-				 */
-				return true;
+				BufferedReader rd = new BufferedReader(new InputStreamReader(
+						response.getEntity().getContent()));
+
+				String webServiceInfo = "";
+				String message = "";
+				
+				while ((webServiceInfo = rd.readLine()) != null) {
+					Log.d("info", webServiceInfo);
+					message += webServiceInfo;
+				}
+
+				return message;
 			}
 		} catch (Exception e) {
 			Log.e("info", e.getMessage());
-			return false;
+			return e.getMessage();
 		}
-		return false;
+		return null;
 	}
 }
