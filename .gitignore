@@ -1,5 +1,7 @@
 .metadata/
 .metadata/.mylyn/tasks.xml.zip
+./metadata/plugins
+./metadata/plugins/
 
 .metadata/.log
 .metadata/.plugins/org.eclipse.cdt.core/.log
