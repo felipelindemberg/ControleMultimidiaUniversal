@@ -1,4 +1,4 @@
-package com.embedded.controlemultimidiauniversal;
+package com.embedded.controlemultimidiauniversal.net;
 
 import java.security.InvalidParameterException;
 import java.util.Map;
