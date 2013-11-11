@@ -1,7 +1,5 @@
 package com.embedded.controlemultimidiauniversal.net;
 
-
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.security.InvalidParameterException;
@@ -12,6 +10,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.embedded.controlemultimidiauniversal.Equipment;
 
 import android.net.Uri;
 import android.net.Uri.Builder;
@@ -59,6 +59,41 @@ public class HttpConnectionSender extends AsyncTask<String, Void, String> {
 		}
 	}
 
+	/**
+	 * M&eacute;todo que gera uma URL v&aacute;lida apartir de um Map e
+	 * informa&ccedil;&otilde;es do c&ocirc;modo a ser controloado.
+	 * 
+	 * @param params
+	 *            Um Map com as seguintes chaves, sendo que a chave "address"
+	 *            &eacute; obrigat&oacute;ria:
+	 *            <ul>
+	 *            <li><b>address</b> - O endere&ccedil;o;</li>
+	 *            <li><b>path</b> - Caminho dentro do endere&ccedil;o.</li>
+	 *            </ul>
+	 * 
+	 * @param nameRoom
+	 *            Nome do c&ocirc;modo.
+	 * @param equipment
+	 *            Equipmento a ser controlado.
+	 * @param command
+	 *            Comando a ser enviado.
+	 * 
+	 * @return Uma URL apartir dos dados informados.
+	 * @throws InvalidParameterException
+	 *             Se alguma chave for omitida no Map.
+	 *
+	 */
+	public static String createURL(Map<String, String> params, String nameRoom,
+			Equipment equipment, Command command)
+			throws InvalidParameterException {
+
+		params.put("nameRoom", nameRoom);
+		params.put("equipment", equipment.toString());
+		params.put("command", command.toString());
+
+		return createURL(params);
+	}
+
 	@Override
 	protected String doInBackground(String... params) {
 		try {
@@ -85,7 +120,7 @@ public class HttpConnectionSender extends AsyncTask<String, Void, String> {
 
 				String webServiceInfo = "";
 				String message = "";
-				
+
 				while ((webServiceInfo = rd.readLine()) != null) {
 					Log.d("info", webServiceInfo);
 					message += webServiceInfo;
