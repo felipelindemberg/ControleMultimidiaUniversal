@@ -47,69 +47,54 @@
             android:textSize="30dp" />
     </LinearLayout>
 
-   <TableLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dip"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
-        
-       <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal" >
+        android:orientation="horizontal" >
 
-            <ImageButton
-                android:id="@+id/buttonUpChannel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_channel_up" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
+        <ImageButton
+            android:id="@+id/buttonDownVolume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal" >
-			<ImageButton
-                android:id="@+id/buttonDownVolume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dip"
-                android:background="@drawable/custom_button_volume_down" />
-            
-            <ImageButton
-                android:id="@+id/buttonMute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:layout_marginRight="40dip"
-                android:background="@drawable/custom_button_mute" />
-            
-            
-            <ImageButton
-                android:id="@+id/buttonUpVolume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_volume_up" />
-        </TableRow>
+            android:layout_marginTop="40dip"
+            android:background="@drawable/custom_button_volume_down" />
 
-  
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="fill_parent"
+        <ImageButton
+            android:id="@+id/buttonUpChannel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:gravity="center_horizontal" >
+            android:layout_toRightOf="@+id/buttonDownVolume"
+            android:background="@drawable/custom_button_channel_up" />
 
-            <ImageButton
-                android:id="@+id/buttonDownChannel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_channel_down" />
-        </TableRow>
-    </TableLayout>
+        <ImageButton
+            android:id="@+id/buttonMute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonUpChannel"
+            android:layout_marginLeft="25dip"
+            android:layout_marginTop="20dip"
+            android:layout_toRightOf="@+id/buttonDownVolume"
+            android:background="@drawable/custom_button_mute" />
+
+        <ImageButton
+            android:id="@+id/buttonDownChannel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonMute"
+            android:layout_toRightOf="@+id/buttonDownVolume"
+            android:layout_alignLeft="@+id/buttonUpChannel"
+            android:layout_marginTop="30dip"
+            android:background="@drawable/custom_button_channel_down" />
+
+        <ImageButton
+            android:id="@+id/buttonUpVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/buttonDownVolume"
+            android:layout_toRightOf="@+id/buttonUpChannel"
+            android:background="@drawable/custom_button_volume_up" />
+
+    </RelativeLayout>
 
 </LinearLayout>
