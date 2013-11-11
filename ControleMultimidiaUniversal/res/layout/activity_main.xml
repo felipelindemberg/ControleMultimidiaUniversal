@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_gray"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity" >
 
     <LinearLayout
@@ -17,14 +18,23 @@
             android:id="@+id/checkBoxTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
             android:button="@drawable/custom_check_box_tv"
             android:checked="true" />
+
+        <ImageButton
+            android:id="@+id/buttonPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:background="@drawable/custom_button_mute" />
 
         <CheckBox
             android:id="@+id/checkBoxSom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dip"
+            android:layout_marginTop="40dip"
             android:button="@drawable/custom_check_box_som"
             android:checked="false" />
     </LinearLayout>
@@ -50,14 +60,23 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/buttonMute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/custom_button_mute" />
 
         <ImageButton
             android:id="@+id/buttonDownVolume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dip"
+            android:layout_below="@+id/buttonUpChannel"
             android:background="@drawable/custom_button_volume_down" />
 
         <ImageButton
@@ -68,23 +87,12 @@
             android:background="@drawable/custom_button_channel_up" />
 
         <ImageButton
-            android:id="@+id/buttonMute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonUpChannel"
-            android:layout_marginLeft="25dip"
-            android:layout_marginTop="20dip"
-            android:layout_toRightOf="@+id/buttonDownVolume"
-            android:background="@drawable/custom_button_mute" />
-
-        <ImageButton
             android:id="@+id/buttonDownChannel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonMute"
-            android:layout_toRightOf="@+id/buttonDownVolume"
             android:layout_alignLeft="@+id/buttonUpChannel"
-            android:layout_marginTop="30dip"
+            android:layout_below="@+id/buttonDownVolume"
+            android:layout_toRightOf="@+id/buttonDownVolume"
             android:background="@drawable/custom_button_channel_down" />
 
         <ImageButton
@@ -94,7 +102,6 @@
             android:layout_alignTop="@+id/buttonDownVolume"
             android:layout_toRightOf="@+id/buttonUpChannel"
             android:background="@drawable/custom_button_volume_up" />
-
     </RelativeLayout>
 
 </LinearLayout>
