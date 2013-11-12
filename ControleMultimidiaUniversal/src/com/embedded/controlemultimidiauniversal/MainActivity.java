@@ -16,8 +16,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		setUpSelectSom();
-		setUpSelectTv();
+		//setUpSelectSom();
+		//setUpSelectTv();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void setUpSelectTv() {
-		checkTv = (CheckBox) findViewById(R.id.checkBoxTv);
+/*		checkTv = (CheckBox) findViewById(R.id.checkBoxTv);
 		checkTv.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -39,12 +39,12 @@ public class MainActivity extends Activity {
 				checkSom.setChecked(false);
 
 			}
-		});
+		});*/
 
 	}
 
 	private void setUpSelectSom() {
-		checkSom = (CheckBox) findViewById(R.id.checkBoxSom);
+/*		checkSom = (CheckBox) findViewById(R.id.checkBoxSom);
 		checkSom.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 				checkTv.setChecked(false);
 
 			}
-		});
+		});*/
 
 	}
 
