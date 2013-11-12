@@ -15,6 +15,7 @@
 
         <CheckBox
             android:id="@+id/checkBoxTv"
+            android:onClick="onClick_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/custom_check_box_tv"
@@ -22,6 +23,7 @@
 
         <CheckBox
             android:id="@+id/checkBoxSom"
+            android:onClick="onClick_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dip"
@@ -62,11 +64,11 @@
 
             <ImageButton
                 android:id="@+id/buttonUpChannel"
+                android:onClick="onClick_buttonControlEquipment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button_channel_up" />
-        </TableRow>
-
+        </TableRow> 
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
