@@ -14,10 +14,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView.FindListener;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 public class MainActivity extends Activity {
 
-	private CheckBox checkTv, checkSom;
+	private RadioButton checkTv, checkSom;
 	private String nameRoom;
 	private String address;
 	private Equipment equipment = Equipment.TV;
@@ -44,25 +45,20 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClick_checkBox(View view) {
-		if (checkSom == null && checkTv == null) {
-			checkTv = (CheckBox) findViewById(R.id.checkBoxTv);
-			checkSom = (CheckBox) findViewById(R.id.checkBoxSom);
-		}
+	    boolean checked = ((RadioButton) view).isChecked();
+	    
+	    switch(view.getId()) {
+	        case R.id.checkBoxTv:
+	            if (checked)
+	            	equipment = Equipment.TV;
+	            break;
+	        case R.id.checkBoxSom:
+	            if (checked)
+	            	equipment = Equipment.SOM;
+	            break;
+	    }
+	
 
-		checkSom.setChecked(false);
-		checkTv.setChecked(false);
-
-		switch (view.getId()) {
-		case R.id.checkBoxSom:
-			checkSom.setChecked(true);
-			equipment = Equipment.SOM;
-			break;
-
-		case R.id.checkBoxTv:
-			checkTv.setChecked(true);
-			equipment = Equipment.TV;
-			break;
-		}
 
 		if (D)
 			Log.d(TAG, "Equipamento alterado: " + equipment.toString());
@@ -102,7 +98,7 @@ public class MainActivity extends Activity {
 
 		params.put("command", command.toString());
 		params.put("nameRoom", nameRoom);
-		
+
 		url = HttpConnectionSender.createURL(params, nameRoom, equipment,
 				command);
 		new HttpConnectionSender().execute("post", url);

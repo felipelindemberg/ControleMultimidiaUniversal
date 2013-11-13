@@ -5,5 +5,6 @@
     <item android:drawable="@drawable/tv_selected" android:state_checked="false" android:state_pressed="true"/>
     <item android:drawable="@drawable/tv_default" android:state_checked="false"/>
     <item android:drawable="@drawable/tv_checked" android:state_checked="true"/>
+    
 
 </selector>

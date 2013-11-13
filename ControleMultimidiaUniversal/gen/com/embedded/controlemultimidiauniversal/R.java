@@ -25,6 +25,7 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
+        public static final int layout_width_button_tv=0x7f050002;
     }
     public static final class drawable {
         public static final int background_name_room=0x7f020000;
@@ -40,32 +41,35 @@ public final class R {
         public static final int custom_button_channel_down=0x7f02000a;
         public static final int custom_button_channel_up=0x7f02000b;
         public static final int custom_button_mute=0x7f02000c;
-        public static final int custom_button_volume_down=0x7f02000d;
-        public static final int custom_button_volume_up=0x7f02000e;
-        public static final int custom_check_box_som=0x7f02000f;
-        public static final int custom_check_box_tv=0x7f020010;
-        public static final int ic_launcher=0x7f020011;
-        public static final int som_checked=0x7f020012;
-        public static final int som_default=0x7f020013;
-        public static final int som_selected=0x7f020014;
-        public static final int tv_checked=0x7f020015;
-        public static final int tv_default=0x7f020016;
-        public static final int tv_selected=0x7f020017;
-        public static final int volume_down_default=0x7f020018;
-        public static final int volume_down_pressed=0x7f020019;
-        public static final int volume_up_default=0x7f02001a;
-        public static final int volume_up_pressed=0x7f02001b;
+        public static final int custom_button_power=0x7f02000d;
+        public static final int custom_button_volume_down=0x7f02000e;
+        public static final int custom_button_volume_up=0x7f02000f;
+        public static final int custom_check_box_som=0x7f020010;
+        public static final int custom_check_box_tv=0x7f020011;
+        public static final int ic_launcher=0x7f020012;
+        public static final int som_checked=0x7f020013;
+        public static final int som_default=0x7f020014;
+        public static final int som_selected=0x7f020015;
+        public static final int turn_off=0x7f020016;
+        public static final int turn_off_pressed=0x7f020017;
+        public static final int tv_checked=0x7f020018;
+        public static final int tv_default=0x7f020019;
+        public static final int tv_selected=0x7f02001a;
+        public static final int volume_down_default=0x7f02001b;
+        public static final int volume_down_pressed=0x7f02001c;
+        public static final int volume_up_default=0x7f02001d;
+        public static final int volume_up_pressed=0x7f02001e;
     }
     public static final class id {
         public static final int action_settings=0x7f090009;
         public static final int buttonDownChannel=0x7f090006;
         public static final int buttonDownVolume=0x7f090004;
         public static final int buttonMute=0x7f090008;
-        public static final int buttonPower=0x7f090001;
+        public static final int buttonPower=0x7f090000;
         public static final int buttonUpChannel=0x7f090005;
         public static final int buttonUpVolume=0x7f090007;
         public static final int checkBoxSom=0x7f090002;
-        public static final int checkBoxTv=0x7f090000;
+        public static final int checkBoxTv=0x7f090001;
         public static final int textViewNameRoom=0x7f090003;
     }
     public static final class layout {

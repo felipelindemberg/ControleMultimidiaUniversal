@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_gray"
-    android:gravity="center_horizontal|fill_horizontal"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
@@ -14,32 +14,34 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
-        <CheckBox
-            android:id="@+id/checkBoxTv"
-            android:onClick="onClick_checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
-            android:button="@drawable/custom_check_box_tv"
-            android:checked="true" />
-
         <ImageButton
             android:id="@+id/buttonPower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_button_mute" />
+            android:background="@drawable/custom_button_power" />
+    </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/checkBoxSom"
-            android:onClick="onClick_checkBox"
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/checkBoxTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
+            android:button="@drawable/custom_check_box_tv"
+            android:onClick="onClick_checkBox"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/checkBoxSom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:button="@drawable/custom_check_box_som"
-            android:checked="false" />
-    </LinearLayout>
+            android:onClick="onClick_checkBox" />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -101,16 +103,15 @@
             android:id="@+id/buttonMute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonUpChannel"
-            android:layout_toLeftOf="@+id/buttonUpVolume"
-            android:layout_toRightOf="@+id/buttonDownVolume"
             android:layout_above="@+id/buttonDownChannel"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/buttonUpChannel"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/custom_button_mute"/>
-
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/buttonUpVolume"
+            android:layout_toRightOf="@+id/buttonDownVolume"
+            android:background="@drawable/custom_button_mute" />
     </RelativeLayout>
 
 </LinearLayout>
