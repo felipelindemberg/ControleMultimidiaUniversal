@@ -3,13 +3,14 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_gray"
+    android:gravity="center_horizontal|fill_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dip"
+        android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
@@ -18,15 +19,24 @@
             android:onClick="onClick_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
             android:button="@drawable/custom_check_box_tv"
             android:checked="true" />
+
+        <ImageButton
+            android:id="@+id/buttonPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_mute" />
 
         <CheckBox
             android:id="@+id/checkBoxSom"
             android:onClick="onClick_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dip"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
             android:button="@drawable/custom_check_box_som"
             android:checked="false" />
     </LinearLayout>
@@ -34,7 +44,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dip"
+        android:layout_marginTop="15dp"
         android:background="@drawable/background_name_room"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
@@ -43,75 +53,64 @@
             android:id="@+id/textViewNameRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="20dp"
             android:text="SALA"
             android:textColor="@color/red"
             android:textSize="30dp" />
     </LinearLayout>
 
-   <TableLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dip"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
-        
-       <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal" >
+        android:orientation="horizontal" >
 
-            <ImageButton
-                android:id="@+id/buttonUpChannel"
-                android:onClick="onClick_buttonControlEquipment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_channel_up" />
-        </TableRow> 
-        <TableRow
-            android:id="@+id/tableRow2"
+        <ImageButton
+            android:id="@+id/buttonDownVolume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal" >
-			<ImageButton
-                android:id="@+id/buttonDownVolume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dip"
-                android:background="@drawable/custom_button_volume_down" />
-            
-            <ImageButton
-                android:id="@+id/buttonMute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:layout_marginRight="40dip"
-                android:background="@drawable/custom_button_mute" />
-            
-            
-            <ImageButton
-                android:id="@+id/buttonUpVolume"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_volume_up" />
-        </TableRow>
+            android:layout_below="@+id/buttonUpChannel"
+            android:background="@drawable/custom_button_volume_down" />
 
-  
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="fill_parent"
+        <ImageButton
+            android:id="@+id/buttonUpChannel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:gravity="center_horizontal" >
+            android:layout_toRightOf="@+id/buttonDownVolume"
+            android:background="@drawable/custom_button_channel_up" />
 
-            <ImageButton
-                android:id="@+id/buttonDownChannel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button_channel_down" />
-        </TableRow>
-    </TableLayout>
+        <ImageButton
+            android:id="@+id/buttonDownChannel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/buttonUpChannel"
+            android:layout_below="@+id/buttonDownVolume"
+            android:layout_toRightOf="@+id/buttonDownVolume"
+            android:background="@drawable/custom_button_channel_down" />
+
+        <ImageButton
+            android:id="@+id/buttonUpVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/buttonDownVolume"
+            android:layout_toRightOf="@+id/buttonUpChannel"
+            android:background="@drawable/custom_button_volume_up" />
+
+        <ImageButton
+            android:id="@+id/buttonMute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonUpChannel"
+            android:layout_toLeftOf="@+id/buttonUpVolume"
+            android:layout_toRightOf="@+id/buttonDownVolume"
+            android:layout_above="@+id/buttonDownChannel"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_button_mute"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
