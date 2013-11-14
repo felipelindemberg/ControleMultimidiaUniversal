@@ -32,6 +32,8 @@
             android:id="@+id/checkBoxTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_check_box_tv"
             android:button="@drawable/custom_check_box_tv"
             android:checked="true"
             android:onClick="onClick_checkBox" />
@@ -40,6 +42,7 @@
             android:id="@+id/checkBoxSom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_check_box_som"
             android:button="@drawable/custom_check_box_som"
             android:onClick="onClick_checkBox" />
     </RadioGroup>
