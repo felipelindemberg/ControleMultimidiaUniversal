@@ -7,7 +7,7 @@ package com.embedded.controlemultimidiauniversal.net;
  * 
  */
 public enum Command {
-	POWER("power"), UPVOLUME("volume"), DOWNVOLUME("downVolume"), UPCHANNEL(
+	POWER("power"), UPVOLUME("upVolume"), DOWNVOLUME("downVolume"), UPCHANNEL(
 			"upChannel"), DOWNCHANNEL("downChannel"), MUTE("mute");
 
 	String command;

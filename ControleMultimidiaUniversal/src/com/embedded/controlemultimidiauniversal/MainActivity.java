@@ -11,14 +11,10 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.webkit.WebView.FindListener;
-import android.widget.CheckBox;
 import android.widget.RadioButton;
 
 public class MainActivity extends Activity {
 
-	private RadioButton checkTv, checkSom;
 	private String nameRoom;
 	private String address;
 	private Equipment equipment = Equipment.TV;
@@ -32,7 +28,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		if (D) {
-			address = "http://192.168.2.2:5432";
+			address = "http://192.168.2.5:5432";
 			nameRoom = "Teste";
 		}
 	}
@@ -45,20 +41,18 @@ public class MainActivity extends Activity {
 	}
 
 	public void onClick_checkBox(View view) {
-	    boolean checked = ((RadioButton) view).isChecked();
-	    
-	    switch(view.getId()) {
-	        case R.id.checkBoxTv:
-	            if (checked)
-	            	equipment = Equipment.TV;
-	            break;
-	        case R.id.checkBoxSom:
-	            if (checked)
-	            	equipment = Equipment.SOM;
-	            break;
-	    }
-	
+		boolean checked = ((RadioButton) view).isChecked();
 
+		switch (view.getId()) {
+		case R.id.checkBoxTv:
+			if (checked)
+				equipment = Equipment.TV;
+			break;
+		case R.id.checkBoxSom:
+			if (checked)
+				equipment = Equipment.SOM;
+			break;
+		}
 
 		if (D)
 			Log.d(TAG, "Equipamento alterado: " + equipment.toString());
@@ -73,9 +67,10 @@ public class MainActivity extends Activity {
 		params.put("path", "sendCommand");
 
 		switch (view.getId()) {
-		/*
-		 * case R.id.buttonPower: command = Command.POWER;
-		 */
+
+		case R.id.buttonPower:
+			command = Command.POWER;
+			break;
 		case R.id.buttonUpVolume:
 			command = Command.UPVOLUME;
 			break;
