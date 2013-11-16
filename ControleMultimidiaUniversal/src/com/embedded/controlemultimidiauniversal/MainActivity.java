@@ -6,21 +6,26 @@ import java.util.Map;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 
 import com.embedded.controlemultimidiauniversal.net.Command;
@@ -42,6 +47,9 @@ public class MainActivity extends Activity {
 
 	public static boolean D = true;
 	public static final String TAG = "Debug_Controle";
+
+	private PopupWindow popupWindow;
+	private Button btnClosePopup;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -197,13 +205,23 @@ public class MainActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			Log.i("Info", String.valueOf(position));
 			selectItem(position);
 		}
 	}
 
 	private void selectItem(int position) {
+		switch (position) {
+		case 0:
+			initiatePopup(R.layout.popup_sleep, R.id.popupSleepElement,
+					R.id.btn_close_popupSleep);
+			break;
 
-		// initiatePopupWindow();
+		case 1:
+			initiatePopup(R.layout.popup_list_rooms, R.id.popupListRoomsElement,
+					R.id.btn_close_popupListRooms);
+			break;
+		}
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mPlanetTitles[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
@@ -227,4 +245,28 @@ public class MainActivity extends Activity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
+	private void initiatePopup(int layoutId, int popupElementId, int btnCloseId) {
+		try {
+			LayoutInflater inflater = (LayoutInflater) MainActivity.this
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View layout = inflater.inflate(layoutId,
+					(ViewGroup) findViewById(popupElementId));
+			popupWindow = new PopupWindow(layout, 300, 370, true);
+			popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
+
+			btnClosePopup = (Button) layout
+					.findViewById(btnCloseId);
+			btnClosePopup.setOnClickListener(cancel_button_popup);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private OnClickListener cancel_button_popup = new OnClickListener() {
+		public void onClick(View v) {
+			popupWindow.dismiss();
+			setTitle(getResources().getString(R.string.app_name));
+		}
+	};
 }

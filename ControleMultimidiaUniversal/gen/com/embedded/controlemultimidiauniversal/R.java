@@ -52,21 +52,24 @@ public final class R {
         public static final int drawer_shadow=0x7f020012;
         public static final int ic_drawer=0x7f020013;
         public static final int ic_launcher=0x7f020014;
-        public static final int som_checked=0x7f020015;
-        public static final int som_default=0x7f020016;
-        public static final int som_selected=0x7f020017;
-        public static final int turn_off=0x7f020018;
-        public static final int turn_off_pressed=0x7f020019;
-        public static final int tv_checked=0x7f02001a;
-        public static final int tv_default=0x7f02001b;
-        public static final int tv_selected=0x7f02001c;
-        public static final int volume_down_default=0x7f02001d;
-        public static final int volume_down_pressed=0x7f02001e;
-        public static final int volume_up_default=0x7f02001f;
-        public static final int volume_up_pressed=0x7f020020;
+        public static final int my_border=0x7f020015;
+        public static final int som_checked=0x7f020016;
+        public static final int som_default=0x7f020017;
+        public static final int som_selected=0x7f020018;
+        public static final int turn_off=0x7f020019;
+        public static final int turn_off_pressed=0x7f02001a;
+        public static final int tv_checked=0x7f02001b;
+        public static final int tv_default=0x7f02001c;
+        public static final int tv_selected=0x7f02001d;
+        public static final int volume_down_default=0x7f02001e;
+        public static final int volume_down_pressed=0x7f02001f;
+        public static final int volume_up_default=0x7f020020;
+        public static final int volume_up_pressed=0x7f020021;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000c;
+        public static final int action_settings=0x7f0a0011;
+        public static final int btn_close_popupListRooms=0x7f0a000e;
+        public static final int btn_close_popupSleep=0x7f0a0010;
         public static final int buttonDownChannel=0x7f0a0009;
         public static final int buttonDownVolume=0x7f0a0007;
         public static final int buttonMute=0x7f0a000b;
@@ -78,12 +81,17 @@ public final class R {
         public static final int content_frame=0x7f0a0001;
         public static final int drawer_layout=0x7f0a0000;
         public static final int left_drawer=0x7f0a0002;
+        public static final int popupListRoomsElement=0x7f0a000c;
+        public static final int popupSleepElement=0x7f0a000f;
         public static final int textViewNameRoom=0x7f0a0006;
+        public static final int txtView=0x7f0a000d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int control_screen=0x7f030001;
         public static final int drawer_list_item=0x7f030002;
+        public static final int popup_list_rooms=0x7f030003;
+        public static final int popup_sleep=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f090000;
