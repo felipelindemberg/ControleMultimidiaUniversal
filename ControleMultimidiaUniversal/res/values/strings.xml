@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ControleMultimidiaUniversal</string>
+    <string name="app_name">Controle Multimidia Universal</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Controle Multimídia Universal!</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string-array name="options_array">
+        <item>Sleep</item>
+        <item>Listar cômodos</item>
+    </string-array>
 
 </resources>
