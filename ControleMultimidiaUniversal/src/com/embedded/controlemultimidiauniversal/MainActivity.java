@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.app.Fragment; 
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -205,7 +205,6 @@ public class MainActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Log.i("Info", String.valueOf(position));
 			selectItem(position);
 		}
 	}
