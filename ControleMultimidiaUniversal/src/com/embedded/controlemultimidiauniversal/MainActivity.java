@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.Fragment; 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
-	private String[] mPlanetTitles;
+	private String[] optionsTitles;
 
 	public static boolean D = true;
 	public static final String TAG = "Debug_Controle";
@@ -65,8 +65,14 @@ public class MainActivity extends Activity {
 	}
 
 	private void createMenu() {
+		loadParametersForMenu();
+		createActionBarDrawerToggle();
+		showControlScreenFragment();
+	}
+
+	private void loadParametersForMenu() {
 		mTitle = mDrawerTitle = getTitle();
-		mPlanetTitles = getResources().getStringArray(R.array.options_array);
+		optionsTitles = getResources().getStringArray(R.array.options_array);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -74,12 +80,14 @@ public class MainActivity extends Activity {
 				GravityCompat.START);
 
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.drawer_list_item, mPlanetTitles));
+				R.layout.drawer_list_item, optionsTitles));
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+	}
 
+	private void createActionBarDrawerToggle() {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
@@ -93,17 +101,25 @@ public class MainActivity extends Activity {
 				invalidateOptionsMenu();
 			}
 		};
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		showControlScreenFragment();
 	}
 
-	public void showControlScreenFragment() {
+	private void showControlScreenFragment() {
 		Fragment fragment = new ControlScreen();
 
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
+	}
+
+	public static class ControlScreen extends Fragment {
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.control_screen,
+					container, false);
+			return rootView;
+		}
 	}
 
 	public void onClick_checkBox(View view) {
@@ -165,21 +181,6 @@ public class MainActivity extends Activity {
 		new HttpConnectionSender().execute("post", url);
 	}
 
-	public static class ControlScreen extends Fragment {
-		public static final String ARG_PLANET_NUMBER = "planet_number";
-
-		public ControlScreen() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.control_screen,
-					container, false);
-			return rootView;
-		}
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -215,14 +216,13 @@ public class MainActivity extends Activity {
 			initiatePopup(R.layout.popup_sleep, R.id.popupSleepElement,
 					R.id.btn_close_popupSleep);
 			break;
-
 		case 1:
-			initiatePopup(R.layout.popup_list_rooms, R.id.popupListRoomsElement,
-					R.id.btn_close_popupListRooms);
+			initiatePopup(R.layout.popup_list_rooms,
+					R.id.popupListRoomsElement, R.id.btn_close_popupListRooms);
 			break;
 		}
 		mDrawerList.setItemChecked(position, true);
-		setTitle(mPlanetTitles[position]);
+		setTitle(optionsTitles[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
 	}
 
@@ -253,8 +253,7 @@ public class MainActivity extends Activity {
 			popupWindow = new PopupWindow(layout, 300, 370, true);
 			popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
-			btnClosePopup = (Button) layout
-					.findViewById(btnCloseId);
+			btnClosePopup = (Button) layout.findViewById(btnCloseId);
 			btnClosePopup.setOnClickListener(cancel_button_popup);
 
 		} catch (Exception e) {
@@ -263,6 +262,7 @@ public class MainActivity extends Activity {
 	}
 
 	private OnClickListener cancel_button_popup = new OnClickListener() {
+		@Override
 		public void onClick(View v) {
 			popupWindow.dismiss();
 			setTitle(getResources().getString(R.string.app_name));
