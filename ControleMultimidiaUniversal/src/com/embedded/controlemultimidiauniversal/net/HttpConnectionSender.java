@@ -1,15 +1,10 @@
 package com.embedded.controlemultimidiauniversal.net;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.security.InvalidParameterException;
 import java.util.Map;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.HttpStatus;
 
 import com.embedded.controlemultimidiauniversal.Equipment;
 
@@ -81,7 +76,7 @@ public class HttpConnectionSender extends AsyncTask<String, Void, String> {
 	 * @return Uma URL apartir dos dados informados.
 	 * @throws InvalidParameterException
 	 *             Se alguma chave for omitida no Map.
-	 *
+	 * 
 	 */
 	public static String createURL(Map<String, String> params, String nameRoom,
 			Equipment equipment, Command command)
@@ -99,34 +94,31 @@ public class HttpConnectionSender extends AsyncTask<String, Void, String> {
 		try {
 
 			if (params.length == 2) {
+				HttpClientConnection httpClientConnection;
 				HttpResponse response = null;
-				HttpClient client = new DefaultHttpClient();
 
 				String method = params[0];
 				String url = params[1];
 
 				Log.i("info", url);
-
 				if (method.equals("get")) {
-					HttpGet requestGet = new HttpGet(url);
-					response = client.execute(requestGet);
+					httpClientConnection = new HttpClientConnection(url,
+							HttpProtocol.GET);
+					response = httpClientConnection.execute();
 				} else if (method.equals("post")) {
-					HttpPost requestPost = new HttpPost(url);
-					response = client.execute(requestPost);
+					httpClientConnection = new HttpClientConnection(url,
+							HttpProtocol.POST);
+					response = httpClientConnection.execute();
 				}
 
-				BufferedReader rd = new BufferedReader(new InputStreamReader(
-						response.getEntity().getContent()));
-
-				String webServiceInfo = "";
-				String message = "";
-
-				while ((webServiceInfo = rd.readLine()) != null) {
-					Log.d("info", webServiceInfo);
-					message += webServiceInfo;
+				int statusCode = NetUtils.getHttpResponse(response);
+				if (statusCode == HttpStatus.SC_OK) {
+					try {
+						return NetUtils.readResponse(response);
+					} catch (Exception e) {
+						return null;
+					}
 				}
-
-				return message;
 			}
 		} catch (Exception e) {
 			Log.e("info", e.getMessage());
