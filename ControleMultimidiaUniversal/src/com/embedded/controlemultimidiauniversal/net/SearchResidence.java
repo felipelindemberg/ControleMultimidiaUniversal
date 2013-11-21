@@ -11,34 +11,40 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.conn.util.InetAddressUtils;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.embedded.controlemultimidiauniversal.DefinedContext;
+import com.embedded.controlemultimidiauniversal.ApplicationManager;
 import com.embedded.controlemultimidiauniversal.DefinedIP;
 import com.embedded.controlemultimidiauniversal.MainActivity;
+import com.embedded.controlemultimidiauniversal.R;
 
 public class SearchResidence extends AsyncTask<Void, Void, String> {
 
 	private ProgressDialog pd = null;
-	private final String PROGESS_DIALOG_TITLE = "Aguarde";
-	private final String PROGESS_DIALOG_TEXT = "Procurando residência...";
 	private final String DEFAULT_IP = "192.168.2.5";
 	private DefinedIP activityMain;
-	private DefinedContext activityContextApplication;
+	private ApplicationManager applicationManager;
 
-	public SearchResidence(DefinedIP activityMain, DefinedContext activityContextApplication) {
+	public SearchResidence(DefinedIP activityMain,
+			ApplicationManager activityContextApplication) {
 		this.activityMain = activityMain;
-		this.activityContextApplication = activityContextApplication;
+		this.applicationManager = activityContextApplication;
 	}
 
 	@Override
 	protected void onPreExecute() {
 
-		pd = ProgressDialog.show(activityContextApplication.getContext(),
-				PROGESS_DIALOG_TITLE, PROGESS_DIALOG_TEXT, true);
-		pd.setCancelable(true);
+		pd = ProgressDialog.show(
+				applicationManager.getContext(),
+				applicationManager.getContext().getString(
+						R.string.progress_dialog_searchTitle),
+				applicationManager.getContext().getString(
+						R.string.progress_dialog_searchText), true);
+		pd.setCancelable(false);
 
 	}
 
@@ -105,16 +111,45 @@ public class SearchResidence extends AsyncTask<Void, Void, String> {
 
 		} catch (Exception e) {
 			Log.e("info", e.getMessage());
-			return e.getMessage();
+			return null;
 		}
 		return null;
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
+		pd.dismiss();
 		if (result != null) {
 			activityMain.setIP(result);
-			pd.dismiss();
+		} else {
+			final AlertDialog.Builder builder = new AlertDialog.Builder(
+					applicationManager.getContext());
+			builder.setMessage(
+					applicationManager.getContext().getString(
+							R.string.confirm_dialog_searchTitle))
+					.setPositiveButton(
+							applicationManager.getContext().getString(
+									R.string.confirm_dialog_yes),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									builder.create();
+									onCancelled();
+									new SearchResidence(activityMain,
+											applicationManager).execute();
+								}
+							})
+					.setNegativeButton(
+							applicationManager.getContext().getString(
+									R.string.confirm_dialog_no),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									applicationManager.closeApplication();
+								}
+							});
+			builder.setCancelable(false);
+			builder.show();
 		}
 	}
 

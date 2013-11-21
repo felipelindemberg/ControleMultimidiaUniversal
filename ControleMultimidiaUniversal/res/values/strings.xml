@@ -3,9 +3,13 @@
 
     <string name="app_name">Controle Multimidia Universal</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Controle Multimídia Universal!</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="progress_dialog_searchTitle">Please wait</string>
+    <string name="progress_dialog_searchText">Searching residence...</string>
+    <string name="confirm_dialog_searchTitle">Search again?</string>
+    <string name="confirm_dialog_yes">Yes</string>
+    <string name="confirm_dialog_no">No</string>
     
     <string-array name="options_array">
         <item>Sleep</item>

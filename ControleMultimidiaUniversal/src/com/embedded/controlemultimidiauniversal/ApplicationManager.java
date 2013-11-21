@@ -2,6 +2,7 @@ package com.embedded.controlemultimidiauniversal;
 
 import android.content.Context;
 
-public interface DefinedContext {
+public interface ApplicationManager {
 	public Context getContext();
+	public void closeApplication();
 }

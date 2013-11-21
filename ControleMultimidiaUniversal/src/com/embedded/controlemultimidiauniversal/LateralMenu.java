@@ -1,8 +1,5 @@
 package com.embedded.controlemultimidiauniversal;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,11 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,57 +20,29 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 
-import com.embedded.controlemultimidiauniversal.net.Command;
-import com.embedded.controlemultimidiauniversal.net.HttpSenderTask;
-import com.embedded.controlemultimidiauniversal.net.SearchResidence;
-
-public class MainActivity extends Activity implements DefinedIP, ApplicationManager {
-
-	private String nameRoom = "Teste";
-	private String address;
-	private Equipment equipment = Equipment.TV;
-
-	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
-	private ActionBarDrawerToggle mDrawerToggle;
-
-	private Context context;
+public class LateralMenu extends Activity {
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] optionsTitles;
-
-	public static boolean D = false;
-	public static final String TAG = "Debug_Controle";
+	private DrawerLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private ActionBarDrawerToggle mDrawerToggle;
 
 	private PopupWindow popupWindow;
 	private Button btnClosePopup;
 
-	@Override
-	public void setIP(String ipAdrress) {
-		address = ipAdrress;
-	}
+	private ApplicationManager activityContextApplication;
 
-	@Override
-	public Context getContext() {
-		return context;
+	public LateralMenu(ApplicationManager activityContextApplication) {
+		this.activityContextApplication = activityContextApplication;
 	}
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		context = this;
-		createMenu();
-		new SearchResidence(this, this).execute();
-		if (D) {
-			nameRoom = "Teste";
-		}
-	}
 
-	private void createMenu() {
 		loadParametersForMenu();
 		createActionBarDrawerToggle();
 		showControlScreenFragment();
@@ -84,9 +50,12 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 
 	private void loadParametersForMenu() {
 		mTitle = mDrawerTitle = getTitle();
-		optionsTitles = getResources().getStringArray(R.array.options_array);
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+		optionsTitles = activityContextApplication.getContext().getResources()
+				.getStringArray(R.array.options_array);
+		mDrawerLayout = (DrawerLayout) ((Activity) activityContextApplication
+				.getContext()).findViewById(R.id.drawer_layout);
+		mDrawerList = (ListView) ((Activity) activityContextApplication
+				.getContext()).findViewById(R.id.left_drawer);
 
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
 				GravityCompat.START);
@@ -132,77 +101,6 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 					container, false);
 			return rootView;
 		}
-	}
-
-	public void onClick_checkBox(View view) {
-		boolean checked = ((RadioButton) view).isChecked();
-
-		switch (view.getId()) {
-		case R.id.checkBoxTv:
-			if (checked)
-				equipment = Equipment.TV;
-			break;
-		case R.id.checkBoxSom:
-			if (checked)
-				equipment = Equipment.SOM;
-			break;
-		}
-
-		if (D)
-			Log.d(TAG, "Equipamento alterado: " + equipment.toString());
-	}
-
-	public void onClick_buttonControlEquipment(View view) {
-		Map<String, String> params = new HashMap<String, String>();
-		Command command = null;
-		String url;
-
-		params.put("address", address);
-		params.put("path", "sendCommand");
-
-		switch (view.getId()) {
-
-		case R.id.buttonPower:
-			command = Command.POWER;
-			break;
-		case R.id.buttonUpVolume:
-			command = Command.UPVOLUME;
-			break;
-		case R.id.buttonDownVolume:
-			command = Command.DOWNVOLUME;
-			break;
-		case R.id.buttonUpChannel:
-			command = Command.UPCHANNEL;
-			break;
-		case R.id.buttonDownChannel:
-			command = Command.DOWNCHANNEL;
-			break;
-		case R.id.buttonMute:
-			command = Command.MUTE;
-			break;
-		}
-
-		if (D)
-			Log.d(TAG, "Enviando comando: " + command.toString());
-
-		params.put("command", command.toString());
-		params.put("nameRoom", nameRoom);
-
-		url = HttpSenderTask.createURL(params, nameRoom, equipment,
-				command);
-		new HttpSenderTask().execute("post", url);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -258,8 +156,9 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 
 	private void initiatePopup(int layoutId, int popupElementId, int btnCloseId) {
 		try {
-			LayoutInflater inflater = (LayoutInflater) MainActivity.this
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater inflater = (LayoutInflater) activityContextApplication
+					.getContext().getSystemService(
+							Context.LAYOUT_INFLATER_SERVICE);
 			View layout = inflater.inflate(layoutId,
 					(ViewGroup) findViewById(popupElementId));
 			popupWindow = new PopupWindow(layout, 300, 370, true);
@@ -280,9 +179,4 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 			setTitle(getResources().getString(R.string.app_name));
 		}
 	};
-
-	@Override
-	public void closeApplication() {
-		finish();
-	}
 }
