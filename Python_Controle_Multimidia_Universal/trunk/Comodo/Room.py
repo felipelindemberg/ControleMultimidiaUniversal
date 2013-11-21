@@ -1,5 +1,7 @@
 # coding: utf-8
 
+import sched, time
+from threading import Timer
 from TV import *  # @UnusedWildImport
 from SOUND import *  # @UnusedWildImport
 
@@ -23,6 +25,9 @@ class Room:
         self.addEquipment("tv", TV())
         self.addEquipment("som", SOUND())
         self.__control = False
+        
+        self.__eventTimer = sched.scheduler(time.time, time.sleep)
+        self.__cancelEventTimer = None
     
     def setPort(self, port):
         """Método modificador da porta do cômodo
@@ -36,7 +41,30 @@ class Room:
         :Return: Porta do cômodo
         :Rtype: String
         """
+        
         return self.__port
+    
+    
+    def sleep(self, time):
+        """Método acessador da porta do cômodo
+        :Return: Porta do cômodo
+        :Rtype: String
+        """
+        print("entre no sleep")
+        self.__cancelEventTimer = Timer(time, self.powerOffEquipments, ())
+        self.__cancelEventTimer.start()
+        #self.__cancelEventTimer = self.__eventTimer.enterabs(time, 1, self.powerOffEquipments, ())
+        return "oi"
+       
+    def cancelSleep(self):
+        """Método acessador da porta do cômodo
+        :Return: Porta do cômodo
+        :Rtype: String
+        """
+        if(self.__cancelEventTimer != None):
+		    self.__cancelEventTimer.cancel()
+        self.__cancelEventTimer = None
+        return "oi"
     
     def addEquipment(self, nameEquipment, equipment):
         """Método que faz a adição de equipamentos no cômodo
@@ -149,5 +177,6 @@ class Room:
     def powerOffEquipments(self):
         """Método que faz o desligamento dos aparelhos do cômodo
         """
+        print("tou no poweroff")
         self.getTv().turnOff()
         self.getSound().turnOff()
