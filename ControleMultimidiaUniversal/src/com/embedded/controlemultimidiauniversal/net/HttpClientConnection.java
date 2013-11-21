@@ -8,8 +8,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.embedded.controlemultimidiauniversal.net.HttpProtocol;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.util.Log;
 
@@ -19,9 +20,17 @@ public class HttpClientConnection {
 	private HttpClient mHttpClient;
 	private HttpGet mGet;
 	private HttpPost mPost;
+	private final int TIMEOUT_CONNECTION = 100;
+	private final int TIMEOUT_SOCKET = 100;
 
 	public HttpClientConnection(String url, HttpProtocol httpProtocol) {
-		mHttpClient = new DefaultHttpClient();
+
+		HttpParams httpParameters = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(httpParameters,
+				TIMEOUT_CONNECTION);
+		HttpConnectionParams.setSoTimeout(httpParameters, TIMEOUT_SOCKET);
+
+		mHttpClient = new DefaultHttpClient(httpParameters);
 
 		switch (httpProtocol) {
 		case GET:

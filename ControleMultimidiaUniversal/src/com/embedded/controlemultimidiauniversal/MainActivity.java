@@ -29,11 +29,12 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 
 import com.embedded.controlemultimidiauniversal.net.Command;
-import com.embedded.controlemultimidiauniversal.net.HttpConnectionSender;
+import com.embedded.controlemultimidiauniversal.net.HttpSenderTask;
+import com.embedded.controlemultimidiauniversal.net.SearchResidence;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements DefinedIP, DefinedContext {
 
-	private String nameRoom;
+	private String nameRoom = "Teste";
 	private String address;
 	private Equipment equipment = Equipment.TV;
 
@@ -41,25 +42,36 @@ public class MainActivity extends Activity {
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
+	private Context context;
+
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] optionsTitles;
 
-	public static boolean D = true;
+	public static boolean D = false;
 	public static final String TAG = "Debug_Controle";
 
 	private PopupWindow popupWindow;
 	private Button btnClosePopup;
 
 	@Override
+	public void setIP(String ipAdrress) {
+		address = ipAdrress;
+	}
+
+	@Override
+	public Context getContext() {
+		return context;
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		context = this;
 		createMenu();
-
+		new SearchResidence(this, this).execute();
 		if (D) {
-			address = "http://192.168.2.5:5432";
 			nameRoom = "Teste";
 		}
 	}
@@ -166,7 +178,7 @@ public class MainActivity extends Activity {
 			command = Command.DOWNCHANNEL;
 			break;
 		case R.id.buttonMute:
-			command = Command.DOWNCHANNEL;
+			command = Command.MUTE;
 			break;
 		}
 
@@ -176,9 +188,9 @@ public class MainActivity extends Activity {
 		params.put("command", command.toString());
 		params.put("nameRoom", nameRoom);
 
-		url = HttpConnectionSender.createURL(params, nameRoom, equipment,
+		url = HttpSenderTask.createURL(params, nameRoom, equipment,
 				command);
-		new HttpConnectionSender().execute("post", url);
+		new HttpSenderTask().execute("post", url);
 	}
 
 	@Override

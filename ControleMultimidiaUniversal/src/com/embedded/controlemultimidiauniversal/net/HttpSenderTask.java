@@ -13,7 +13,7 @@ import android.net.Uri.Builder;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class HttpConnectionSender extends AsyncTask<String, Void, String> {
+public class HttpSenderTask extends AsyncTask<String, Void, String> {
 
 	/**
 	 * M&eacute;todo que gera uma URL v&aacute;lida apartir de um Map.
