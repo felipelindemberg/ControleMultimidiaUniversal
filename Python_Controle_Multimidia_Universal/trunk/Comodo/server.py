@@ -165,6 +165,30 @@ class ServerRoom:
         return "Add"
     setNumberOfPeoples.exposed = True
     
+    @cherrypy.tools.allow(methods=['POST'])
+    def sleep(self, time):
+        """Método modificador do número de pessoas presentes no cômodo
+        :Param number: Número de pessoas
+        :Type number: Inteiro
+        :Return: Mensagem de modificação
+        :Rtype: String
+        """
+        self.room.sleep(int(time))
+        return "Add"
+    sleep.exposed = True
+    
+    @cherrypy.tools.allow(methods=['POST'])
+    def cancelSleep(self):
+        """Método modificador do número de pessoas presentes no cômodo
+        :Param number: Número de pessoas
+        :Type number: Inteiro
+        :Return: Mensagem de modificação
+        :Rtype: String
+        """
+        self.room.cancelSleep()
+        return "cancel"
+    cancelSleep.exposed = True
+    
     def getNumberOfPeoples(self):
         """Método acessador do número de pessoas presentes no cômodo
         :Return: Numero de pessoas

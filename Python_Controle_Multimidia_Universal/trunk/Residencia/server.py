@@ -117,6 +117,29 @@ class ServerPrincipal:
         return self.residence.getRoomOfControl()
     getRoomOfControl.exposed = True
     
+    
+    @cherrypy.tools.allow(methods=['POST'])
+    def sleep(self, nameRoom, time):
+        """Método modificador do cômodo a ser controlado
+        :Param nameRoom: Nome do cômodo
+        :Type nameRoom: String
+        :Return: String referente a modicação do cômodo a ser controlado
+        :Rtype: String
+        """
+        return self.residence.sleep(nameRoom, time)
+    sleep.exposed = True
+    
+    @cherrypy.tools.allow(methods=['POST'])
+    def cancelSleep(self, nameRoom):
+        """Método modificador do cômodo a ser controlado
+        :Param nameRoom: Nome do cômodo
+        :Type nameRoom: String
+        :Return: String referente a modicação do cômodo a ser controlado
+        :Rtype: String
+        """
+        return self.residence.cancelSleep(nameRoom)
+    cancelSleep.exposed = True
+    
     def getRooms(self):
         """Método acessador de cômodos
         :Return: Os cômodos adicionados

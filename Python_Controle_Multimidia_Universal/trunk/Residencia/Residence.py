@@ -214,6 +214,41 @@ class Residence:
         else:
             return "Comodo nao existe"
 
+    def sleep(self, nameRoom, time):
+        """Método acessador de cômodos
+        :Return: Cômodos mapeados pelos seus nomes
+        :Rtype: Dicionário
+        """
+        
+        nameRoom = nameRoom.lower()
+        infoRoom = self.__searchRoom(nameRoom)
+        if(infoRoom != False):
+            ip = infoRoom[0]
+            port = infoRoom[1]
+            params = {"time": time}
+            method = "sleep"
+            return util.httpPostRequest(ip, port, method, params)
+        else:
+            return "Comodo nao existe"
+    
+    def cancelSleep(self, nameRoom):
+        """Método acessador de cômodos
+        :Return: Cômodos mapeados pelos seus nomes
+        :Rtype: Dicionário
+        """
+        
+        nameRoom = nameRoom.lower()
+        infoRoom = self.__searchRoom(nameRoom)
+        if(infoRoom != False):
+            ip = infoRoom[0]
+            port = infoRoom[1]
+            params = {}
+            method = "cancelSleep"
+            return util.httpPostRequest(ip, port, method, params)
+        else:
+            return "Comodo nao existe"
+
+    
     def getRooms(self):
         """Método acessador de cômodos
         :Return: Cômodos mapeados pelos seus nomes
