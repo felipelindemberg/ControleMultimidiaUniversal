@@ -49,6 +49,7 @@ public class MainActivity extends Activity implements IDefinedIP,
 	private String[] optionsTitles;
 
 	public static boolean D = false;
+	public static boolean RUN_IN_DEVICE = false;
 	public static final String TAG = "Debug_Controle";
 
 	@Override
@@ -77,7 +78,10 @@ public class MainActivity extends Activity implements IDefinedIP,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		context = this;
-		new SearchResidence(this, this).execute();
+		if (RUN_IN_DEVICE) {
+			new SearchResidence(this, this).execute();
+		}
+
 		createMenu();
 		if (D) {
 			nameRoom = "Teste";

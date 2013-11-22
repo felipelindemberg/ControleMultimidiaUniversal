@@ -41,3 +41,7 @@ proguard/
 .idea/
 
 *.pyc
+
+ControleMultimidiaUniversal/bin/classes.dex
+ControleMultimidiaUniversal/bin/ControleMultimidiaUniversal.apk
+ControleMultimidiaUniversal/bin/AndroidManifest.xml
