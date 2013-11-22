@@ -19,22 +19,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.embedded.controlemultimidiauniversal.net.Command;
 import com.embedded.controlemultimidiauniversal.net.HttpSenderTask;
 import com.embedded.controlemultimidiauniversal.net.SearchResidence;
 
-public class MainActivity extends Activity implements DefinedIP, ApplicationManager {
+public class MainActivity extends Activity implements IDefinedIP,
+		IApplicationManager, INamedRoom {
 
-	private String nameRoom = "Teste";
+	private String nameRoom;
 	private String address;
 	private Equipment equipment = Equipment.TV;
 
@@ -65,12 +67,23 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 	}
 
 	@Override
+	public void setNameRoom(String nameRoom) {
+		if (nameRoom != null && !nameRoom.isEmpty()) {
+			this.nameRoom = nameRoom;
+			Toast toast = Toast.makeText(context,
+					getString(R.string.text_roomChanged), Toast.LENGTH_SHORT);
+			toast.show();
+			setTitle(nameRoom);
+		}
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		context = this;
-		createMenu();
 		new SearchResidence(this, this).execute();
+		createMenu();
 		if (D) {
 			nameRoom = "Teste";
 		}
@@ -188,8 +201,7 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 		params.put("command", command.toString());
 		params.put("nameRoom", nameRoom);
 
-		url = HttpSenderTask.createURL(params, nameRoom, equipment,
-				command);
+		url = HttpSenderTask.createURL(params, nameRoom, equipment, command);
 		new HttpSenderTask().execute("post", url);
 	}
 
@@ -240,7 +252,10 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 
 	@Override
 	public void setTitle(CharSequence title) {
-		mTitle = title;
+		if (nameRoom == null)
+			mTitle = title;
+		else
+			mTitle = nameRoom;
 		getActionBar().setTitle(mTitle);
 	}
 
@@ -285,4 +300,5 @@ public class MainActivity extends Activity implements DefinedIP, ApplicationMana
 	public void closeApplication() {
 		finish();
 	}
+
 }

@@ -1,5 +1,5 @@
 package com.embedded.controlemultimidiauniversal;
 
-public interface DefinedIP {
+public interface IDefinedIP {
 	public void setIP (String ipAdrress);
 }

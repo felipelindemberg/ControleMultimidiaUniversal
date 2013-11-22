@@ -17,8 +17,8 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.embedded.controlemultimidiauniversal.ApplicationManager;
-import com.embedded.controlemultimidiauniversal.DefinedIP;
+import com.embedded.controlemultimidiauniversal.IApplicationManager;
+import com.embedded.controlemultimidiauniversal.IDefinedIP;
 import com.embedded.controlemultimidiauniversal.MainActivity;
 import com.embedded.controlemultimidiauniversal.R;
 
@@ -26,11 +26,11 @@ public class SearchResidence extends AsyncTask<Void, Void, String> {
 
 	private ProgressDialog pd = null;
 	private final String DEFAULT_IP = "192.168.2.5";
-	private DefinedIP activityMain;
-	private ApplicationManager applicationManager;
+	private IDefinedIP activityMain;
+	private IApplicationManager applicationManager;
 
-	public SearchResidence(DefinedIP activityMain,
-			ApplicationManager activityContextApplication) {
+	public SearchResidence(IDefinedIP activityMain,
+			IApplicationManager activityContextApplication) {
 		this.activityMain = activityMain;
 		this.applicationManager = activityContextApplication;
 	}

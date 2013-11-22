@@ -10,6 +10,7 @@
     <string name="confirm_dialog_searchTitle">Search again?</string>
     <string name="confirm_dialog_yes">Yes</string>
     <string name="confirm_dialog_no">No</string>
+    <string name="text_roomChanged">Room changed</string>
     
     <string-array name="options_array">
         <item>Sleep</item>

@@ -67,9 +67,10 @@ public final class R {
         public static final int volume_up_pressed=0x7f020021;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0011;
+        public static final int action_settings=0x7f0a0012;
         public static final int btn_close_popupListRooms=0x7f0a000e;
         public static final int btn_close_popupSleep=0x7f0a0010;
+        public static final int button1=0x7f0a0011;
         public static final int buttonDownChannel=0x7f0a0009;
         public static final int buttonDownVolume=0x7f0a0007;
         public static final int buttonMute=0x7f0a000b;
@@ -92,6 +93,7 @@ public final class R {
         public static final int drawer_list_item=0x7f030002;
         public static final int popup_list_rooms=0x7f030003;
         public static final int popup_sleep=0x7f030004;
+        public static final int teste=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -106,6 +108,7 @@ public final class R {
         public static final int drawer_open=0x7f060002;
         public static final int progress_dialog_searchText=0x7f060005;
         public static final int progress_dialog_searchTitle=0x7f060004;
+        public static final int text_roomChanged=0x7f060009;
     }
     public static final class style {
         /** 
