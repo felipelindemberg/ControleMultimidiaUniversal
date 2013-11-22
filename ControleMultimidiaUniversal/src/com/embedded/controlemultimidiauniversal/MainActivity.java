@@ -4,28 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -52,9 +50,6 @@ public class MainActivity extends Activity implements IDefinedIP,
 
 	public static boolean D = false;
 	public static final String TAG = "Debug_Controle";
-
-	private PopupWindow popupWindow;
-	private Button btnClosePopup;
 
 	@Override
 	public void setIP(String ipAdrress) {
@@ -237,12 +232,10 @@ public class MainActivity extends Activity implements IDefinedIP,
 	private void selectItem(int position) {
 		switch (position) {
 		case 0:
-			initiatePopup(R.layout.popup_sleep, R.id.popupSleepElement,
-					R.id.btn_close_popupSleep);
+			initiatePopup(R.layout.popup_sleep);
 			break;
 		case 1:
-			initiatePopup(R.layout.popup_list_rooms,
-					R.id.popupListRoomsElement, R.id.btn_close_popupListRooms);
+			initiatePopup(R.layout.popup_list_rooms);
 			break;
 		}
 		mDrawerList.setItemChecked(position, true);
@@ -271,30 +264,36 @@ public class MainActivity extends Activity implements IDefinedIP,
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	private void initiatePopup(int layoutId, int popupElementId, int btnCloseId) {
+	private void initiatePopup(int layoutId) {
 		try {
-			LayoutInflater inflater = (LayoutInflater) MainActivity.this
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View layout = inflater.inflate(layoutId,
-					(ViewGroup) findViewById(popupElementId));
-			popupWindow = new PopupWindow(layout, 300, 370, true);
-			popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-			btnClosePopup = (Button) layout.findViewById(btnCloseId);
-			btnClosePopup.setOnClickListener(cancel_button_popup);
+			LayoutInflater inflater = this.getLayoutInflater();
+
+			builder.setView(inflater.inflate(layoutId, null))
+					.setPositiveButton("Confirmar",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int id) {
+									setTitle(getString(R.string.app_name));
+								}
+							})
+					.setNegativeButton("Cancelar",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									setTitle(getString(R.string.app_name));
+								}
+							});
+			builder.create();
+			builder.setCancelable(false);
+			builder.show();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-	private OnClickListener cancel_button_popup = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			popupWindow.dismiss();
-			setTitle(getResources().getString(R.string.app_name));
-		}
-	};
 
 	@Override
 	public void closeApplication() {
