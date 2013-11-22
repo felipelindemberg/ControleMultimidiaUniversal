@@ -22,14 +22,14 @@ import com.embedded.controlemultimidiauniversal.IDefinedIP;
 import com.embedded.controlemultimidiauniversal.MainActivity;
 import com.embedded.controlemultimidiauniversal.R;
 
-public class SearchResidence extends AsyncTask<Void, Void, String> {
+public class SearchResidenceTask extends AsyncTask<Void, Void, String> {
 
 	private ProgressDialog pd = null;
 	private final String DEFAULT_IP = "192.168.2.5";
-	private IDefinedIP activityMain;
-	private IApplicationManager applicationManager;
+	private final IDefinedIP activityMain;
+	private final IApplicationManager applicationManager;
 
-	public SearchResidence(IDefinedIP activityMain,
+	public SearchResidenceTask(IDefinedIP activityMain,
 			IApplicationManager activityContextApplication) {
 		this.activityMain = activityMain;
 		this.applicationManager = activityContextApplication;
@@ -135,7 +135,7 @@ public class SearchResidence extends AsyncTask<Void, Void, String> {
 										int id) {
 									builder.create();
 									onCancelled();
-									new SearchResidence(activityMain,
+									new SearchResidenceTask(activityMain,
 											applicationManager).execute();
 								}
 							})

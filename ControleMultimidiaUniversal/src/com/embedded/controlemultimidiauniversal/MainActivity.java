@@ -27,9 +27,10 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.embedded.controlemultimidiauniversal.bluetooth.BluetoothTask;
 import com.embedded.controlemultimidiauniversal.net.Command;
 import com.embedded.controlemultimidiauniversal.net.HttpSenderTask;
-import com.embedded.controlemultimidiauniversal.net.SearchResidence;
+import com.embedded.controlemultimidiauniversal.net.SearchResidenceTask;
 
 public class MainActivity extends Activity implements IDefinedIP,
 		IApplicationManager, INamedRoom {
@@ -64,10 +65,10 @@ public class MainActivity extends Activity implements IDefinedIP,
 	@Override
 	public void setNameRoom(String nameRoom) {
 		if (nameRoom != null && !nameRoom.isEmpty()) {
+			Log.d("CONNECTED", "Name "+nameRoom);
 			this.nameRoom = nameRoom;
-			Toast toast = Toast.makeText(context,
-					getString(R.string.text_roomChanged), Toast.LENGTH_SHORT);
-			toast.show();
+			Log.d("CONNECTED", "This "+nameRoom);
+			Toast.makeText(getBaseContext(),getString(R.string.text_roomChanged), Toast.LENGTH_SHORT).show();
 			setTitle(nameRoom);
 		}
 	}
@@ -77,7 +78,8 @@ public class MainActivity extends Activity implements IDefinedIP,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		context = this;
-		new SearchResidence(this, this).execute();
+		new BluetoothTask(this).execute();
+		//new SearchResidence(this, this).execute();
 		createMenu();
 		if (D) {
 			nameRoom = "Teste";
@@ -287,7 +289,6 @@ public class MainActivity extends Activity implements IDefinedIP,
 								}
 							});
 			builder.create();
-			builder.setCancelable(false);
 			builder.show();
 
 		} catch (Exception e) {
