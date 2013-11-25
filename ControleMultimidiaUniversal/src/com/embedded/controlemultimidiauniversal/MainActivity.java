@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements ApplicationManager {
 
@@ -44,16 +43,6 @@ public class MainActivity extends Activity implements ApplicationManager {
 	@Override
 	public Context getContext() {
 		return context;
-	}
-
-	public void setNameRoom(String nameRoom) {
-		if (nameRoom != null && !nameRoom.isEmpty()) {
-			this.nameRoom = nameRoom;
-			Toast toast = Toast.makeText(context,
-					getString(R.string.text_roomChanged), Toast.LENGTH_SHORT);
-			toast.show();
-			setTitle(nameRoom);
-		}
 	}
 
 	@Override

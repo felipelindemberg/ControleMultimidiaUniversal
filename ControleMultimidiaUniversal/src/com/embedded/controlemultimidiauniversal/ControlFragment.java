@@ -3,9 +3,13 @@ package com.embedded.controlemultimidiauniversal;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import com.embedded.controlemultimidiauniversal.bluetooth.BluetoothServiceReceive;
+import com.embedded.controlemultimidiauniversal.bluetooth.BluetoothServiceSender;
 import com.embedded.controlemultimidiauniversal.net.Command;
 import com.embedded.controlemultimidiauniversal.net.HttpSenderTask;
 import com.embedded.controlemultimidiauniversal.net.SearchResidence;
@@ -25,6 +31,9 @@ public class ControlFragment extends Fragment {
 	private String address;
 	private String nameRoom = "Teste";
 	private MainActivity mainActivity;
+	private Activity activity;
+
+	private BluetoothServiceReceive bluetoothServiceReceive;
 
 	public ControlFragment(MainActivity mainActivity) {
 		this.mainActivity = mainActivity;
@@ -33,11 +42,26 @@ public class ControlFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		activity = super.getActivity();
+		
 		View view = inflater.inflate(R.layout.control, container, false);
 		createRadioGroupEvent(view);
 		createButtonsEvent(view);
+		createBluetoothServiceIntent();
 		callSearchResidence();
 		return view;
+	}
+
+	private void createBluetoothServiceIntent() {
+		IntentFilter filter = new IntentFilter(
+				BluetoothServiceReceive.BLUETOOTH_RESULT);
+		filter.addCategory(Intent.CATEGORY_DEFAULT);
+		bluetoothServiceReceive = new BluetoothServiceReceive(activity);
+		activity.registerReceiver(bluetoothServiceReceive, filter);
+
+		Intent msgIntent = new Intent(activity,
+				BluetoothServiceSender.class);
+		activity.startService(msgIntent);
 	}
 
 	public void callSearchResidence() {
