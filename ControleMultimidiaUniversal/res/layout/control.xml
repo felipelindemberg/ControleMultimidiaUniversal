@@ -22,28 +22,27 @@
     </LinearLayout>
 
     <RadioGroup
+        android:id="@+id/radioGroupEquipments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/checkBoxTv"
+            android:id="@+id/radioButtonTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:background="@drawable/custom_check_box_tv"
             android:button="@drawable/custom_check_box_tv"
-            android:checked="true"
-            android:onClick="onClick_checkBox" />
+            android:checked="true" />
 
         <RadioButton
-            android:id="@+id/checkBoxSom"
+            android:id="@+id/radioButtonSom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_check_box_som"
-            android:button="@drawable/custom_check_box_som"
-            android:onClick="onClick_checkBox" />
+            android:button="@drawable/custom_check_box_som" />
     </RadioGroup>
 
     <LinearLayout
@@ -76,16 +75,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttonUpChannel"
-            android:background="@drawable/custom_button_volume_down"
-            android:onClick="onClick_buttonControlEquipment" />
+            android:background="@drawable/custom_button_volume_down" />
 
         <ImageButton
             android:id="@+id/buttonUpChannel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/buttonDownVolume"
-            android:background="@drawable/custom_button_channel_up"
-            android:onClick="onClick_buttonControlEquipment" />
+            android:background="@drawable/custom_button_channel_up" />
 
         <ImageButton
             android:id="@+id/buttonDownChannel"
@@ -94,8 +91,7 @@
             android:layout_alignLeft="@+id/buttonUpChannel"
             android:layout_below="@+id/buttonDownVolume"
             android:layout_toRightOf="@+id/buttonDownVolume"
-            android:background="@drawable/custom_button_channel_down"
-            android:onClick="onClick_buttonControlEquipment" />
+            android:background="@drawable/custom_button_channel_down" />
 
         <ImageButton
             android:id="@+id/buttonUpVolume"
@@ -103,8 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/buttonDownVolume"
             android:layout_toRightOf="@+id/buttonUpChannel"
-            android:background="@drawable/custom_button_volume_up"
-            android:onClick="onClick_buttonControlEquipment" />
+            android:background="@drawable/custom_button_volume_up" />
 
         <ImageButton
             android:id="@+id/buttonMute"
@@ -118,8 +113,7 @@
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/buttonUpVolume"
             android:layout_toRightOf="@+id/buttonDownVolume"
-            android:background="@drawable/custom_button_mute"
-            android:onClick="onClick_buttonControlEquipment" />
+            android:background="@drawable/custom_button_mute" />
     </RelativeLayout>
 
 </LinearLayout>

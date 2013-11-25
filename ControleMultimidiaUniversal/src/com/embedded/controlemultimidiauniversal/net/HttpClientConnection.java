@@ -20,8 +20,8 @@ public class HttpClientConnection {
 	private HttpClient mHttpClient;
 	private HttpGet mGet;
 	private HttpPost mPost;
-	private final int TIMEOUT_CONNECTION = 100;
-	private final int TIMEOUT_SOCKET = 100;
+	private final int TIMEOUT_CONNECTION = 50;
+	private final int TIMEOUT_SOCKET = 50;
 
 	public HttpClientConnection(String url, HttpProtocol httpProtocol) {
 

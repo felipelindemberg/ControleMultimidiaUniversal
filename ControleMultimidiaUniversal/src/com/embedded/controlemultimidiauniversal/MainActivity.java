@@ -1,7 +1,5 @@
 package com.embedded.controlemultimidiauniversal;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,19 +21,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.embedded.controlemultimidiauniversal.net.Command;
-import com.embedded.controlemultimidiauniversal.net.HttpSenderTask;
-import com.embedded.controlemultimidiauniversal.net.SearchResidence;
-
-public class MainActivity extends Activity implements IDefinedIP,
-		IApplicationManager, INamedRoom {
+public class MainActivity extends Activity implements ApplicationManager {
 
 	private String nameRoom;
-	private String address;
-	private Equipment equipment = Equipment.TV;
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -53,16 +42,10 @@ public class MainActivity extends Activity implements IDefinedIP,
 	public static final String TAG = "Debug_Controle";
 
 	@Override
-	public void setIP(String ipAdrress) {
-		address = ipAdrress;
-	}
-
-	@Override
 	public Context getContext() {
 		return context;
 	}
 
-	@Override
 	public void setNameRoom(String nameRoom) {
 		if (nameRoom != null && !nameRoom.isEmpty()) {
 			this.nameRoom = nameRoom;
@@ -78,14 +61,12 @@ public class MainActivity extends Activity implements IDefinedIP,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		context = this;
-		if (RUN_IN_DEVICE) {
-			new SearchResidence(this, this).execute();
-		}
-
+		new  ControlFragment(this);
 		createMenu();
 		if (D) {
 			nameRoom = "Teste";
 		}
+		
 	}
 
 	private void createMenu() {
@@ -128,7 +109,7 @@ public class MainActivity extends Activity implements IDefinedIP,
 	}
 
 	private void showControlScreenFragment() {
-		Fragment fragment = new ControlScreen();
+		ControlFragment fragment = new ControlFragment(this);
 
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
@@ -140,68 +121,10 @@ public class MainActivity extends Activity implements IDefinedIP,
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.control_screen,
-					container, false);
+			View rootView = inflater
+					.inflate(R.layout.control, container, false);
 			return rootView;
 		}
-	}
-
-	public void onClick_checkBox(View view) {
-		boolean checked = ((RadioButton) view).isChecked();
-
-		switch (view.getId()) {
-		case R.id.checkBoxTv:
-			if (checked)
-				equipment = Equipment.TV;
-			break;
-		case R.id.checkBoxSom:
-			if (checked)
-				equipment = Equipment.SOM;
-			break;
-		}
-
-		if (D)
-			Log.d(TAG, "Equipamento alterado: " + equipment.toString());
-	}
-
-	public void onClick_buttonControlEquipment(View view) {
-		Map<String, String> params = new HashMap<String, String>();
-		Command command = null;
-		String url;
-
-		params.put("address", address);
-		params.put("path", "sendCommand");
-
-		switch (view.getId()) {
-
-		case R.id.buttonPower:
-			command = Command.POWER;
-			break;
-		case R.id.buttonUpVolume:
-			command = Command.UPVOLUME;
-			break;
-		case R.id.buttonDownVolume:
-			command = Command.DOWNVOLUME;
-			break;
-		case R.id.buttonUpChannel:
-			command = Command.UPCHANNEL;
-			break;
-		case R.id.buttonDownChannel:
-			command = Command.DOWNCHANNEL;
-			break;
-		case R.id.buttonMute:
-			command = Command.MUTE;
-			break;
-		}
-
-		if (D)
-			Log.d(TAG, "Enviando comando: " + command.toString());
-
-		params.put("command", command.toString());
-		params.put("nameRoom", nameRoom);
-
-		url = HttpSenderTask.createURL(params, nameRoom, equipment, command);
-		new HttpSenderTask().execute("post", url);
 	}
 
 	@Override

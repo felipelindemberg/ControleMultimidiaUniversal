@@ -17,21 +17,21 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.embedded.controlemultimidiauniversal.IApplicationManager;
-import com.embedded.controlemultimidiauniversal.IDefinedIP;
+import com.embedded.controlemultimidiauniversal.ApplicationManager;
 import com.embedded.controlemultimidiauniversal.MainActivity;
 import com.embedded.controlemultimidiauniversal.R;
+import com.embedded.controlemultimidiauniversal.SetableAddressRoom;
 
 public class SearchResidence extends AsyncTask<Void, Void, String> {
 
 	private ProgressDialog pd = null;
 	private final String DEFAULT_IP = "192.168.2.5";
-	private IDefinedIP activityMain;
-	private IApplicationManager applicationManager;
+	private SetableAddressRoom setableAddresRoom;
+	private ApplicationManager applicationManager;
 
-	public SearchResidence(IDefinedIP activityMain,
-			IApplicationManager activityContextApplication) {
-		this.activityMain = activityMain;
+	public SearchResidence(SetableAddressRoom setableAddresRoom,
+			ApplicationManager activityContextApplication) {
+		this.setableAddresRoom = setableAddresRoom;
 		this.applicationManager = activityContextApplication;
 	}
 
@@ -82,7 +82,7 @@ public class SearchResidence extends AsyncTask<Void, Void, String> {
 		String ipV4 = (!MainActivity.D ? getFormatedIPv4() : DEFAULT_IP);
 		try {
 			for (int i = 0; i <= 3; i++) {
-				for (int j = 0; j <= 255; j++) {
+				for (int j = 0; j <= 10; j++) {
 					param.put("address", "http://" + ipV4 + String.valueOf(i)
 							+ "." + String.valueOf(j) + ":5432");
 					url = HttpSenderTask.createURL(param);
@@ -120,7 +120,7 @@ public class SearchResidence extends AsyncTask<Void, Void, String> {
 	protected void onPostExecute(String result) {
 		pd.dismiss();
 		if (result != null) {
-			activityMain.setIP(result);
+			setableAddresRoom.onAddressDiscovery(result);
 		} else {
 			final AlertDialog.Builder builder = new AlertDialog.Builder(
 					applicationManager.getContext());
@@ -135,7 +135,7 @@ public class SearchResidence extends AsyncTask<Void, Void, String> {
 										int id) {
 									builder.create();
 									onCancelled();
-									new SearchResidence(activityMain,
+									new SearchResidence(setableAddresRoom,
 											applicationManager).execute();
 								}
 							})
